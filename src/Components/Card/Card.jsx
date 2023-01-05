@@ -12,10 +12,14 @@ export const Card = ({ data }) => {
   }
 
   const handleVictoriesMinus = () => {
-    setStats({ ...stats, victories: stats.victories - 1 })
+    if (stats.victories > 0) {
+      setStats({ ...stats, victories: stats.victories - 1 })
+    }
   }
   const handleDefeatsMinus = () => {
-    setStats({ ...stats, defeats: stats.defeats - 1 })
+    if (stats.defeats > 0) {
+      setStats({ ...stats, defeats: stats.defeats - 1 })
+    }
   }
 
   function handleReset() {
@@ -67,12 +71,22 @@ export const Card = ({ data }) => {
               :
               <>
                 <div className="flex gap-1">
-                  <button className='px-6 py-2 bg-orange-600 rounded-lg text-white font-bold' onClick={handleVictoriesMinus}>-</button>
+                  {
+                    stats.victories === 0 ?
+                      <button className='px-6 py-2 bg-slate-600 rounded-lg text-white font-bold' onClick={handleVictoriesMinus} disabled>-</button>
+                      :
+                      <button className='px-6 py-2 bg-orange-600 rounded-lg text-white font-bold' onClick={handleVictoriesMinus}>-</button>
+                  }
                   <button className='px-6 py-2 bg-emerald-600 rounded-lg text-white' onClick={handleVictories}>Victoria!</button>
                 </div>
                 <div className="flex gap-1">
                   <button className='px-6 py-2 bg-rose-600 rounded-lg text-white' onClick={handleDefeats}>Derrota!</button>
-                  <button className='px-6 py-2 bg-orange-600 rounded-lg text-white font-bold' onClick={handleDefeatsMinus}>-</button>
+                  {
+                    stats.defeats === 0 ?
+                      <button className='px-6 py-2 bg-slate-600 rounded-lg text-white font-bold' onClick={handleDefeatsMinus} disabled>-</button>
+                      :
+                      <button className='px-6 py-2 bg-orange-600 rounded-lg text-white font-bold' onClick={handleDefeatsMinus}>-</button>
+                  }
                 </div>
               </>
           }
