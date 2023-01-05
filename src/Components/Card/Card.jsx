@@ -11,6 +11,13 @@ export const Card = ({ data }) => {
     setStats({ ...stats, defeats: stats.defeats + 1 })
   }
 
+  const handleVictoriesMinus = () => {
+    setStats({ ...stats, victories: stats.victories - 1 })
+  }
+  const handleDefeatsMinus = () => {
+    setStats({ ...stats, defeats: stats.defeats - 1 })
+  }
+
   function handleReset() {
     setStats({ victories: 0, defeats: 0 })
   }
@@ -44,17 +51,29 @@ export const Card = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="flex justify-around mt-5">
+        <div className="flex justify-around mt-5 gap-10">
           {
             stats.victories === 7 || stats.defeats === 20 ?
               <>
-                <button className='px-6 py-2 bg-slate-600 rounded-lg text-white' onClick={handleVictories} disabled>Victoria!</button>
-                <button className='px-6 py-2 bg-slate-600 rounded-lg text-white' onClick={handleVictories} disabled>Derrota!</button>
+                <div className="flex gap-1">
+                  <button className='px-6 py-2 bg-rose-700 rounded-lg text-white' onClick={handleVictoriesMinus} disabled>-</button>
+                  <button className='px-6 py-2 bg-slate-600 rounded-lg text-white' onClick={handleVictories} disabled>Victoria!</button>
+                </div>
+                <div className="flex gap-1">
+                  <button className='px-6 py-2 bg-slate-600 rounded-lg text-white' onClick={handleVictories} disabled>Derrota!</button>
+                  <button className='px-6 py-2 bg-rose-700 rounded-lg text-white' onClick={handleDefeatsMinus} disabled>-</button>
+                </div>
               </>
               :
               <>
-                <button className='px-6 py-2 bg-emerald-600 rounded-lg text-white' onClick={handleVictories}>Victoria!</button>
-                <button className='px-6 py-2 bg-rose-600 rounded-lg text-white' onClick={handleDefeats}>Derrota!</button>
+                <div className="flex gap-1">
+                  <button className='px-6 py-2 bg-rose-700 rounded-lg text-white' onClick={handleVictoriesMinus}>-</button>
+                  <button className='px-6 py-2 bg-emerald-600 rounded-lg text-white' onClick={handleVictories}>Victoria!</button>
+                </div>
+                <div className="flex gap-1">
+                  <button className='px-6 py-2 bg-rose-600 rounded-lg text-white' onClick={handleDefeats}>Derrota!</button>
+                  <button className='px-6 py-2 bg-rose-700 rounded-lg text-white' onClick={handleDefeatsMinus}>-</button>
+                </div>
               </>
           }
         </div>
